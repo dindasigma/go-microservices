@@ -10,8 +10,8 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/controllers"
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/models/users"
+	"github.com/dindasigma/go-microservices-user/packages/api/controllers"
+	"github.com/dindasigma/go-microservices-user/packages/api/models/users"
 	"github.com/gorilla/mux"
 	"github.com/stretchr/testify/assert"
 )

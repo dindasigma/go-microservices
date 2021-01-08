@@ -2,9 +2,9 @@ FROM golang:latest
 
 LABEL maintainer="Dinda <dindasigma@gmail.com>"
 
-WORKDIR /app
+WORKDIR /app/services/user
 
-COPY ./ /app
+COPY ./ /app/services/user
 
 RUN go mod download
 

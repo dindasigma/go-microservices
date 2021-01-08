@@ -6,8 +6,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/datasources"
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/models/users"
+	"github.com/dindasigma/go-microservices-user/packages/api/datasources"
+	"github.com/dindasigma/go-microservices-user/packages/api/models/users"
 	"github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"
 )

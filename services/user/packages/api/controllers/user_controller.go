@@ -8,11 +8,11 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/auth"
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/datasources"
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/models/users"
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/utils/formaterror"
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/utils/responses"
+	"github.com/dindasigma/go-microservices-user/packages/api/auth"
+	"github.com/dindasigma/go-microservices-user/packages/api/datasources"
+	"github.com/dindasigma/go-microservices-user/packages/api/models/users"
+	"github.com/dindasigma/go-microservices-user/packages/api/utils/formaterror"
+	"github.com/dindasigma/go-microservices-user/packages/api/utils/responses"
 	"github.com/gorilla/mux"
 )
 

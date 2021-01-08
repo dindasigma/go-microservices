@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/auth"
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/utils/responses"
+	"github.com/dindasigma/go-microservices-user/packages/api/auth"
+	"github.com/dindasigma/go-microservices-user/packages/api/utils/responses"
 )
 
 func SetMiddlewareJSON(next http.HandlerFunc) http.HandlerFunc {

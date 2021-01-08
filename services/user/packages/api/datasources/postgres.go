@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/models/users"
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/seed"
+	"github.com/dindasigma/go-microservices-user/packages/api/models/users"
+	"github.com/dindasigma/go-microservices-user/packages/api/seed"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )

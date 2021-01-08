@@ -1,4 +1,4 @@
-module github.com/dindasigma/go-docker-boilerplate
+module github.com/dindasigma/go-microservices-user
 
 go 1.15
 
@@ -9,7 +9,7 @@ require (
 	github.com/gorilla/mux v1.7.4
 	github.com/jinzhu/gorm v1.9.12
 	github.com/joho/godotenv v1.3.0
-	github.com/spf13/viper v1.7.1
+	github.com/nsqio/go-nsq v1.0.8
 	github.com/stretchr/testify v1.6.1
 	github.com/swaggo/http-swagger v0.0.0-20200308142732-58ac5e232fba
 	github.com/swaggo/swag v1.6.3

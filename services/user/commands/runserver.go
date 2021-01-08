@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/dindasigma/go-docker-boilerplate/packages/api"
+	"github.com/dindasigma/go-microservices-user/packages/api"
 )
 
 // @title Go Docker Boilerplate API

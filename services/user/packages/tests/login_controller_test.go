@@ -10,7 +10,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/controllers"
+	"github.com/dindasigma/go-microservices-user/packages/api/controllers"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/application"
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/datasources"
+	"github.com/dindasigma/go-microservices-user/packages/api/application"
+	"github.com/dindasigma/go-microservices-user/packages/api/datasources"
 	"github.com/joho/godotenv"
 )
 

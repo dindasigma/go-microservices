@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/badoux/checkmail"
-	"github.com/dindasigma/go-docker-boilerplate/packages/api/utils/crypto"
+	"github.com/dindasigma/go-microservices-user/packages/api/utils/crypto"
 	"github.com/jinzhu/gorm"
 )
 
