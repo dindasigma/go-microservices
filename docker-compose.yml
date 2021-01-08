@@ -28,8 +28,10 @@ services:
       - go-network
 
   postgres-db:
-    image: postgres:latest
     container_name: go_db
+    build:
+      context: .
+      dockerfile: Dockerfile.postgre
     environment:
       - POSTGRES_USER=${DB_USER}  
       - POSTGRES_PASSWORD=${DB_PASSWORD}

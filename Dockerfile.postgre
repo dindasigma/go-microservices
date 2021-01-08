@@ -1,0 +1,4 @@
+FROM postgres:latest
+
+# copy initdb.d for create messaging user with only select privilage
+COPY docker-entrypoint-initdb.d /docker-entrypoint-initdb.d
