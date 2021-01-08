@@ -11,6 +11,7 @@ import (
 	"github.com/dindasigma/go-microservices-user/packages/api/auth"
 	"github.com/dindasigma/go-microservices-user/packages/api/datasources"
 	"github.com/dindasigma/go-microservices-user/packages/api/models/users"
+	"github.com/dindasigma/go-microservices-user/packages/api/services/publisher"
 	"github.com/dindasigma/go-microservices-user/packages/api/utils/formaterror"
 	"github.com/dindasigma/go-microservices-user/packages/api/utils/responses"
 	"github.com/gorilla/mux"
@@ -69,6 +70,10 @@ func (c *userController) Create(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusInternalServerError, formattedError)
 		return
 	}
+
+	// publish topic new_user
+	userid := []byte(fmt.Sprint(userCreated.ID))
+	publisher.Publish("new_user", userid)
 
 	w.Header().Set("Location", fmt.Sprintf("%s%s/%d", r.Host, r.RequestURI, userCreated.ID))
 	responses.JSON(w, http.StatusCreated, userCreated)

@@ -1,15 +1,29 @@
 version: "3"
 services:
-  app:
-    container_name: go_app
+  app-user:
+    container_name: app_user
     build: ./services/user/
     ports:
       - '8080:8080'
     restart: on-failure
     volumes:
-      - ./services/user/:/app
+      - ./services/user/:/app/services/user
     depends_on:
       - postgres-db
+      - nsqlookupd
+      - nsqd
+    networks:
+      - go-network
+  
+  app-messaging:
+    container_name: app_messaging
+    build: ./services/messaging/
+    restart: on-failure
+    volumes:
+      - ./services/messaging/:/app/services/messaging
+    depends_on:
+      - nsqlookupd
+      - nsqd
     networks:
       - go-network
 
