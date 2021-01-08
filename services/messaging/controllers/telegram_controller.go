@@ -18,7 +18,7 @@ type telegramController struct{}
 
 func (c telegramController) SendNewUserNotification(m *nsq.Message) error {
 	userid := string(m.Body)
-	log.Printf("we are sending telegram notification to admin of new user with id %s", userid)
+	log.Printf("WE ARE SENDING TELEGRAM NOTIFICATION TO ADMIN REGARDING TO NEW USER WITH ID %s", userid)
 	// Returning nil will automatically send a FIN command to NSQ to mark the message as processed.
 	return nil
 
