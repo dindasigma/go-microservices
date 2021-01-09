@@ -20,14 +20,23 @@ type Consumer struct {
 func initializeConsumers() {
 	config := nsq.NewConfig()
 
-	emailwelcome := &Consumer{
+	email_welcome := &Consumer{
 		os.Getenv("NSQD_SERVICE_HOST"),
 		os.Getenv("NSQD_SERVICE_PORT"),
 		"new_user",
 		"email_welcome",
 		controllers.EmailController.SendWelcome,
 	}
-	createConsumer(config, emailwelcome)
+	createConsumer(config, email_welcome)
+
+	telegramn_otification := &Consumer{
+		os.Getenv("NSQD_SERVICE_HOST"),
+		os.Getenv("NSQD_SERVICE_PORT"),
+		"new_user",
+		"telegram_notification",
+		controllers.TelegramController.SendNewUserNotification,
+	}
+	createConsumer(config, telegram_notification)
 }
 
 func createConsumer(config *nsq.Config, c *Consumer) {
