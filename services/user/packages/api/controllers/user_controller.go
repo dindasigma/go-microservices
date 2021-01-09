@@ -5,13 +5,15 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/dindasigma/go-microservices-user/packages/api/auth"
 	"github.com/dindasigma/go-microservices-user/packages/api/datasources"
+	"github.com/dindasigma/go-microservices-user/packages/api/helpers"
 	"github.com/dindasigma/go-microservices-user/packages/api/models/users"
-	"github.com/dindasigma/go-microservices-user/packages/api/services/publisher"
 	"github.com/dindasigma/go-microservices-user/packages/api/utils/formaterror"
 	"github.com/dindasigma/go-microservices-user/packages/api/utils/responses"
 	"github.com/gorilla/mux"
@@ -71,9 +73,19 @@ func (c *userController) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// publish topic new_user
+	// publish topic new_user for create email and telegram notification
 	userid := []byte(fmt.Sprint(userCreated.ID))
-	publisher.Publish("new_user", userid)
+
+	sendNotification := helpers.NewPublisher(
+		os.Getenv("NSQD_SERVICE_HOST"),
+		os.Getenv("NSQD_SERVICE_PORT"),
+		"new_user",
+		userid,
+	)
+	err = sendNotification.Publish()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	w.Header().Set("Location", fmt.Sprintf("%s%s/%d", r.Host, r.RequestURI, userCreated.ID))
 	responses.JSON(w, http.StatusCreated, userCreated)
