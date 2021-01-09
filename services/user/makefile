@@ -1,5 +1,5 @@
 build-dev:
-	swag init -g commands/runserver.go
+	#swag init -g commands/runserver.go
 	go build -v commands/runserver.go
 
 rebuild-swagger:

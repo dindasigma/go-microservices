@@ -29,7 +29,7 @@ func initializeConsumers() {
 	}
 	createConsumer(config, email_welcome)
 
-	telegramn_otification := &Consumer{
+	telegram_notification := &Consumer{
 		os.Getenv("NSQD_SERVICE_HOST"),
 		os.Getenv("NSQD_SERVICE_PORT"),
 		"new_user",
