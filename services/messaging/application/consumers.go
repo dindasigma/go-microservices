@@ -9,38 +9,23 @@ import (
 	"github.com/nsqio/go-nsq"
 )
 
-type Consumer struct {
-	host    string
-	port    string
-	topic   string
-	channel string
-	handler nsq.HandlerFunc
-}
-
 func initializeConsumers() {
 	config := nsq.NewConfig()
 
-	emailwelcome := &Consumer{
-		os.Getenv("NSQD_SERVICE_HOST"),
-		os.Getenv("NSQD_SERVICE_PORT"),
-		"new_user",
-		"email_welcome",
-		controllers.EmailController.SendWelcome,
-	}
-	createConsumer(config, emailwelcome)
+	newConsumer(config, "new_user", "email_welcome", controllers.EmailController.SendWelcome)
+	newConsumer(config, "new_user", "telegram_notification", controllers.TelegramController.SendNewUserNotification)
 }
 
-func createConsumer(config *nsq.Config, c *Consumer) {
-
-	consumer, err := nsq.NewConsumer(c.topic, c.channel, config)
+func newConsumer(config *nsq.Config, topic string, channel string, handler nsq.HandlerFunc) {
+	consumer, err := nsq.NewConsumer(topic, channel, config)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// set the Handler for messages received by this Consumer.
-	consumer.AddHandler(nsq.HandlerFunc(c.handler))
+	consumer.AddHandler(nsq.HandlerFunc(handler))
 
-	nsqaddress := fmt.Sprintf("%s:%s", c.host, c.port)
+	nsqaddress := fmt.Sprintf("%s:%s", os.Getenv("NSQD_SERVICE_HOST"), os.Getenv("NSQD_SERVICE_PORT"))
 	err = consumer.ConnectToNSQD(nsqaddress)
 	if err != nil {
 		log.Fatal(err)
