@@ -1,4 +1,4 @@
-# go-microservices
+# go-microservices-example
 
 Microservices implementation with Go, Docker, PostgreSQL, and NSQ.
 

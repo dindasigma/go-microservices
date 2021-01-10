@@ -3,8 +3,6 @@ services:
   app-user:
     container_name: app_user
     build: ./services/user/
-    ports:
-      - '8080:8080'
     restart: on-failure
     volumes:
       - ./services/user/:/app/services/user
@@ -24,6 +22,26 @@ services:
     depends_on:
       - nsqlookupd
       - nsqd
+    networks:
+      - go-network
+
+  app-ticket:
+    container_name: app_ticket
+    build: ./services/ticket/
+    restart: on-failure
+    volumes:
+      - ./services/ticket/:/app/services/ticket
+    networks:
+      - go-network
+
+  nginx:
+    build: ./services/nginx/
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./services/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    links:
+      - app-user
     networks:
       - go-network
 

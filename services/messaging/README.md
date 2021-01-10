@@ -1,4 +1,4 @@
-# user-messaging
+# messaging-microservices
 Handled sending email and telegram notification on new user creation.
 
 ## Tools
