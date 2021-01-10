@@ -17,6 +17,12 @@ type telegramControllerInterface interface {
 type telegramController struct{}
 
 func (c telegramController) SendNewUserNotification(m *nsq.Message) error {
+	if len(m.Body) == 0 {
+		// Returning nil will automatically send a FIN command to NSQ to mark the message as processed.
+		// In this case, a message with an empty body is simply ignored/discarded.
+		return nil
+	}
+
 	userid := string(m.Body)
 	log.Printf("WE ARE SENDING TELEGRAM NOTIFICATION TO ADMIN REGARDING TO NEW USER WITH ID %s", userid)
 	// Returning nil will automatically send a FIN command to NSQ to mark the message as processed.

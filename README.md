@@ -2,7 +2,7 @@
 
 Microservices implementation with Go, Docker, PostgreSQL, and NSQ.
 
-![alt text](microservices.jpg)
+![alt text](microservices.svg)
 
 ## Run
 ```

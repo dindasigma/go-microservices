@@ -20,27 +20,26 @@ type Consumer struct {
 func initializeConsumers() {
 	config := nsq.NewConfig()
 
-	email_welcome := &Consumer{
+	// email welcome
+	createConsumer(config, &Consumer{
 		os.Getenv("NSQD_SERVICE_HOST"),
 		os.Getenv("NSQD_SERVICE_PORT"),
 		"new_user",
 		"email_welcome",
 		controllers.EmailController.SendWelcome,
-	}
-	createConsumer(config, email_welcome)
+	})
 
-	telegram_notification := &Consumer{
+	// telegram notification
+	createConsumer(config, &Consumer{
 		os.Getenv("NSQD_SERVICE_HOST"),
 		os.Getenv("NSQD_SERVICE_PORT"),
 		"new_user",
 		"telegram_notification",
 		controllers.TelegramController.SendNewUserNotification,
-	}
-	createConsumer(config, telegram_notification)
+	})
 }
 
 func createConsumer(config *nsq.Config, c *Consumer) {
-
 	consumer, err := nsq.NewConsumer(c.topic, c.channel, config)
 	if err != nil {
 		log.Fatal(err)
