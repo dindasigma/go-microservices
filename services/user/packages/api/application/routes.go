@@ -16,11 +16,11 @@ func initializeRoutes() {
 	router.HandleFunc("/login", middlewares.SetMiddlewareJSON(controllers.LoginController.Login)).Methods("POST")
 
 	// Users routes
-	router.HandleFunc("/users", middlewares.SetMiddlewareJSON(controllers.UserController.Get)).Methods("GET")
-	router.HandleFunc("/users/{id}", middlewares.SetMiddlewareJSON(controllers.UserController.GetByID)).Methods("GET")
-	router.HandleFunc("/users", middlewares.SetMiddlewareJSON(controllers.UserController.Create)).Methods("POST")
-	router.HandleFunc("/users/{id}", middlewares.SetMiddlewareJSON(middlewares.SetMiddlewareAuthentication(controllers.UserController.Update))).Methods("PUT")
-	router.HandleFunc("/users/{id}", middlewares.SetMiddlewareAuthentication(controllers.UserController.Delete)).Methods("DELETE")
+	router.HandleFunc("/user", middlewares.SetMiddlewareJSON(controllers.UserController.Get)).Methods("GET")
+	router.HandleFunc("/user/{id}", middlewares.SetMiddlewareAuthentication(middlewares.SetMiddlewareJSON(controllers.UserController.GetByID))).Methods("GET")
+	router.HandleFunc("/user", middlewares.SetMiddlewareJSON(controllers.UserController.Create)).Methods("POST")
+	router.HandleFunc("/user/{id}", middlewares.SetMiddlewareJSON(middlewares.SetMiddlewareAuthentication(controllers.UserController.Update))).Methods("PUT")
+	router.HandleFunc("/user/{id}", middlewares.SetMiddlewareAuthentication(controllers.UserController.Delete)).Methods("DELETE")
 
 	// Swagger
 	router.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)

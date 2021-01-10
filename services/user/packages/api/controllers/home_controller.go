@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"gl.atisicloud.com/dinda/sim-infinyscloud-utils/responses"
+	"github.com/dindasigma/go-microservices-user/packages/api/utils/responses"
 )
 
 var (

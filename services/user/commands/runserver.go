@@ -4,9 +4,9 @@ import (
 	"github.com/dindasigma/go-microservices-user/packages/api"
 )
 
-// @title Go Docker Boilerplate API
+// @title User Microservices
 // @version 1.0
-// @description This is a sample API docs with Swagger
+// @description Handled users management and login.
 // @termsOfService http://swagger.io/terms/
 
 // @contact.name Dinda
