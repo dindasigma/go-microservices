@@ -14,6 +14,7 @@ func initializeRoutes() {
 
 	// Login Route
 	router.HandleFunc("/login", middlewares.SetMiddlewareJSON(controllers.LoginController.Login)).Methods("POST")
+	router.HandleFunc("/authenticated", controllers.LoginController.CheckAuth).Methods("GET")
 
 	// Users routes
 	router.HandleFunc("/user", middlewares.SetMiddlewareJSON(controllers.UserController.Get)).Methods("GET")

@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"net/http"
 
@@ -20,6 +21,7 @@ var (
 
 type loginControllerInterface interface {
 	Login(w http.ResponseWriter, r *http.Request)
+	CheckAuth(w http.ResponseWriter, r *http.Request)
 	SignIn(email, password string) (string, error)
 }
 
@@ -64,6 +66,16 @@ func (c *loginController) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	responses.JSON(w, http.StatusOK, token)
+}
+
+// auth function for api gateway
+func (c *loginController) CheckAuth(w http.ResponseWriter, r *http.Request) {
+	err := auth.TokenValid(r)
+
+	if err != nil {
+		responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
+		return
+	}
 }
 
 func (c *loginController) SignIn(email, password string) (string, error) {
