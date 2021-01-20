@@ -1,8 +1,14 @@
 # go-microservices-example
 
-Microservices implementation with Go, Docker, PostgreSQL, and NSQ.
+Microservices implementation with Go, gRPC, Docker, PostgreSQL, and NSQ.
 
 ![alt text](microservices.svg)
+
+## Generate Protobuf
+```
+cd proto
+sh users-gen.sh
+```
 
 ## Run
 ```

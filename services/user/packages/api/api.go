@@ -7,6 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/dindasigma/go-microservices-user/packages/api/controllers"
 	"github.com/dindasigma/go-microservices-user/packages/api/datasources"
 	"github.com/dindasigma/go-microservices-user/packages/api/servers"
 	"github.com/joho/godotenv"
@@ -21,7 +22,7 @@ const (
 // and shutdown the Order microservice
 type app struct {
 	restServer servers.RestServer
-	//grpcServer servers.GrpcServer
+	grpcServer servers.GrpcServer
 	/* Listens for an application termination signal
 	   Ex. (Ctrl X, Docker container shutdown, etc) */
 	shutdownCh chan os.Signal
@@ -45,31 +46,31 @@ func (a app) prepare() {
 // start starts the REST and gRPC Servers in the background
 func (a app) start() {
 	a.restServer.Start() // non blocking now
-	//a.grpcServer.Start() // also non blocking :-)
+	a.grpcServer.Start() // also non blocking :-)
 }
 
 // stop shuts down the servers
 func (a app) shutdown() error {
-	//a.grpcServer.Stop()
+	a.grpcServer.Stop()
 	return a.restServer.Stop()
 }
 
 // newApp creates a new app with REST & gRPC servers
 // this func performs all app related initialization
 func newApp() (app, error) {
-	/*userService := controllers.userController{}
+	userService := controllers.GrpcServer{}
 
 	gs, err := servers.NewGrpcServer(userService, grpcPort)
 	if err != nil {
 		return app{}, err
-	}*/
+	}
 
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
 
 	return app{
 		restServer: servers.NewRestServer(restPort),
-		//grpcServer: gs,
+		grpcServer: gs,
 		shutdownCh: quit,
 	}, nil
 }
@@ -89,8 +90,8 @@ func Run() error {
 	select {
 	case restErr := <-app.restServer.Error():
 		return restErr
-	/*case grpcErr := <-app.grpcServer.Error():
-	return grpcErr*/
+	case grpcErr := <-app.grpcServer.Error():
+		return grpcErr
 	case <-app.shutdownCh:
 		return nil
 	}
