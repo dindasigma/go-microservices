@@ -8,3 +8,6 @@ stop:
 
 down:
 	docker-compose -f docker-compose.yml down
+
+restart-nginx:
+	docker-compose up -d --build nginx
