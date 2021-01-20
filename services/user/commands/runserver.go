@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/dindasigma/go-microservices-user/packages/api"
 )
 
@@ -22,5 +24,8 @@ import (
 // @in header
 // @name Authorization
 func main() {
-	api.Run()
+	if err := api.Run(); err != nil {
+		log.Fatal(err)
+	}
+
 }

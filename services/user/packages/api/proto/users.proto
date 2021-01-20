@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package users;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/dindasigma/go-microservices-user/proto/users;users";
+
+service UserService {
+    // create new user
+    rpc Create (User) returns (User);
+
+    // retrieves an existing user
+    rpc Retrieve (UserID) returns (User);
+}
+
+// message containing user details (this is our entity)
+message User {
+    uint32 id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string email = 4;
+    string password = 5;
+    string role = 6;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+}
+
+// message containing user id
+message UserID {
+    uint32 id = 1;
+}
